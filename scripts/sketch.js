@@ -20,7 +20,7 @@ function setup() {
 
 
 function draw() {
-	background(90)
+	background(70)
 	tree.display()
 
 	while (randomWalkers.walkers.length === qty_walkers && count < 700) {

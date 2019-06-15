@@ -1,4 +1,4 @@
-### Diffusion-Limited Aggregation
+### Diffusion-Limited Aggregation 🌩️🌩️🌩️
 
 Generative algorithm “Diffusion-Limited Aggregation”. The pattern is generated from random walkers clustering around a seed (or set of seed) point(s).
 
