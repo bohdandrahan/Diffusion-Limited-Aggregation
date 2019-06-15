@@ -4,6 +4,10 @@ Generative algorithm “Diffusion-Limited Aggregation”. The pattern is generat
 Check it out [HERE.](https://bohdandrahan.github.io/Diffusion-Limited-Aggregation/.
 )
 
+
+![Alt Text](./images/demo.png)
+
+
 Inspired by work of [Daniel Shiffman](https://thecodingtrain.com/CodingChallenges/034-dla.html)
 
 See also:
