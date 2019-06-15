@@ -1,9 +1,10 @@
 var tree;
 var randomWalkers;
-let qty_walkers = 0;
+let qty_walkers = 1;
 var count = 0;
 let w;
 let h;
+let a
 
 function setup() {
 	w = 500
@@ -16,49 +17,23 @@ function setup() {
 		randomWalkers.addNewWalker()
 }
 
-function getRandomWall() {
-	let x, y;
-	let a = random([0, 1, 2, 3])
-	if (a === 0) {
-		x = random(0, w)
-		y = 0
-	}
-	if (a === 1) {
-		x = w;
-		y = random(0, h)
-	}
-	if (a === 2) {
-		x = random(0, w)
-		y = h
-	}
-	if (a === 3) {
-		x = 0;
-		y = random(0, h)
-	}
-	return [x, y];
-}
-
-function mousePressed() {
-	let newXY = getRandomWall()
-
-	randomWalkers.addNewWalker(newXY[0], newXY[1])
-}
 
 
 function draw() {
 	background(90)
 	tree.display()
-	console.log(frameRate(), tree.walkers.length)
 
-	colision = false
-	while (!colision) {
+	while (randomWalkers.walkers.length === qty_walkers && count < 700) {
 		randomWalkers.update();
 		randomWalkers.checkColisions(tree)
 	}
-	while (randomWalkers.walkers.length < qty_walkers) {
+	randomWalkers.display()
+
+
+	while (randomWalkers.walkers.length < qty_walkers && count < 700 - 1) {
+
 		let newXY = getRandomWall()
 		randomWalkers.addNewWalker(newXY[0], newXY[1])
 	}
-	// randomWalkers.display()
 
 }

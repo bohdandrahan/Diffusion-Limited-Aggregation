@@ -1,4 +1,5 @@
 class Group {
+
 	constructor() {
 		this.walkers = []
 	}
@@ -7,7 +8,7 @@ class Group {
 
 	}
 	addNewWalker(x = random(0, width), y = random(0, height)) {
-		this.walkers.push(new Walker(x, y, 20 - 0.05 * count, count % 360))
+		this.walkers.push(new Walker(x, y, 8, count % 360))
 		count++
 	}
 	display() {
@@ -22,34 +23,48 @@ class Group {
 	}
 }
 class Tree extends Group {
+
 	initWalker() {
-		this.walkers[0] = new Walker(width / 2, height / 2, 15, 0)
+		this.walkers[0] = new Walker(width / 2, height, 3, 0)
 	}
 	update() {}
 }
 
 class RandomWalkers extends Group {
 	checkColisions(group) {
-		let colided = []
 		for (let i = 0; i < this.walkers.length; i++) {
-			for (let j = 0; j < group.walkers.length; j++) {
-				let sqDistance = sqDist(this.walkers[i], group.walkers[j]);
-				if (sqDistance < ((this.walkers[i].radius + group.walkers[j].radius)) ** 2 / 4) {
-					colided.push(this.walkers[i])
-				}
-			}
+			this.walkers[i].checkColision(group)
 		}
-		for (let i = 0; i < colided.length; i++) {
-			this.colide(colided[i], group)
-			colision = true
+		let colidedWalkers = this.walkers.filter(item => item.isColided === true)
+		for (let i = 0; i < colidedWalkers.length; i++) {
+			tree.add(colidedWalkers[i])
 		}
-	}
-	colide(walker, group) {
-		group.add(walker)
-		this.walkers = this.walkers.filter(item => item !== walker)
+		this.walkers = this.walkers.filter(item => item.isColided === false)
 	}
 }
 
+function getRandomWall() {
+	let x, y;
+	let a = random([0]) //, 1, 2, 3])
+	if (a === 0) {
+		x = random(0, w)
+		y = 0
+	}
+	if (a === 1) {
+		x = w;
+		y = random(0, h)
+	}
+	if (a === 2) {
+		x = random(0, w)
+		y = h
+	}
+	if (a === 3) {
+		x = 0;
+		y = random(0, h)
+	}
+	return [x, y];
+}
+
 function sqDist(a, b) {
-	return (a.position.x - b.position.x) ** 2 + (a.position.y - b.position.y) ** 2
+	return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
 }

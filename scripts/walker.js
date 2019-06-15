@@ -3,7 +3,19 @@ class Walker {
 		this.position = createVector(x, y)
 		this.radius = r;
 		this.color = color;
+		this.isColided = false;
 	}
+	checkColision(group) {
+		if (!this.isColided) {
+			for (let i = 0; i < group.walkers.length; i++) {
+				let sqDistance = sqDist(this.position, group.walkers[i].position);
+				if (sqDistance < ((this.radius + group.walkers[i].radius)) ** 2 / 4) {
+					this.isColided = true;
+				}
+			}
+		}
+	}
+
 	update() {
 		let newx = -1
 		while (newx > width || newx < 0) {
