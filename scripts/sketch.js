@@ -7,8 +7,8 @@ let h;
 let a
 
 function setup() {
-	w = windowWidth
-	h = windowHeight
+	w = windowWidth * 0.98
+	h = windowHeight * 0.98
 	createCanvas(w, h)
 	tree = new Tree()
 	tree.initWalker()
