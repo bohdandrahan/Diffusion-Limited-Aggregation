@@ -8,7 +8,7 @@ class Group {
 
 	}
 	addNewWalker(x = random(0, width), y = random(0, height)) {
-		this.walkers.push(new Walker(x, y, 8, count % 360))
+		this.walkers.push(new Walker(x, y, 10, count % 360))
 		count++
 	}
 	display() {

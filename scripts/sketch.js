@@ -7,8 +7,8 @@ let h;
 let a
 
 function setup() {
-	w = 500
-	h = 500
+	w = windowWidth
+	h = windowHeight
 	createCanvas(w, h)
 	tree = new Tree()
 	tree.initWalker()
@@ -17,20 +17,23 @@ function setup() {
 		randomWalkers.addNewWalker()
 }
 
+function mousePressed() {
+	tree.addNewWalker(mouseX, mouseY)
+}
 
 
 function draw() {
 	background(70)
 	tree.display()
 
-	while (randomWalkers.walkers.length === qty_walkers && count < 700) {
+	while (randomWalkers.walkers.length === qty_walkers && count < 10000) {
 		randomWalkers.update();
 		randomWalkers.checkColisions(tree)
 	}
 	randomWalkers.display()
 
 
-	while (randomWalkers.walkers.length < qty_walkers && count < 700 - 1) {
+	while (randomWalkers.walkers.length < qty_walkers && count < 10000 - 1 && tree.walkers.slice(-1)[0].position.y > 10) {
 
 		let newXY = getRandomWall()
 		randomWalkers.addNewWalker(newXY[0], newXY[1])
