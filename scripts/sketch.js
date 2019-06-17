@@ -4,12 +4,23 @@ let qty_walkers = 1;
 var count = 0;
 let w;
 let h;
-let a
+let a;
+let click = true;
 
 function setup() {
+
+
 	w = windowWidth * 0.95
 	h = windowHeight * 0.95
+
 	createCanvas(w, h)
+	button = createButton('RESET');
+	button.position(15, 15);
+	button.mousePressed(reset);
+	button.mouseOut(setClick)
+	button.mouseOver(unsetClick)
+
+
 	tree = new Tree()
 	tree.initWalker()
 	randomWalkers = new RandomWalkers()
@@ -17,8 +28,24 @@ function setup() {
 		randomWalkers.addNewWalker()
 }
 
+function setClick() {
+	click = true
+}
+
+function unsetClick() {
+	click = false
+}
+
 function mousePressed() {
-	tree.addNewWalker(mouseX, mouseY)
+	if (click) {
+		tree.addNewWalker(mouseX, mouseY)
+	}
+}
+
+
+function reset() {
+	tree.walkers = [tree.walkers[0]]
+
 }
 
 
@@ -31,6 +58,7 @@ function draw() {
 		randomWalkers.checkColisions(tree)
 	}
 	randomWalkers.display()
+
 
 
 	while (randomWalkers.walkers.length < qty_walkers && count < 10000 - 1 && tree.walkers.slice(-1)[0].position.y > 10) {
